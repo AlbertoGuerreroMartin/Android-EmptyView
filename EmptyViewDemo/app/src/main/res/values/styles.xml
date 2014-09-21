@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="EmptyView">
+        <item name="emptyText">@string/empty</item>
+        <item name="errorText">@string/error</item>
+        <item name="textSizeSP">@integer/textSize</item>
+        <item name="textPadding">@dimen/textPadding</item>
+        <item name="fadeAnimation">true</item>
+    </style>
+
+</resources>

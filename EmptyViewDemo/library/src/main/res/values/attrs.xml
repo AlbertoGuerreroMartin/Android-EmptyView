@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EmptyView">
+        <attr name="fadeAnimation" format="boolean"/>
+        <attr name="textPadding" format="dimension"/>
+        <attr name="textSizeSP" format="integer"/>
+        <attr name="emptyText" format="string"/>
+        <attr name="errorText" format="string"/>
+    </declare-styleable>
+</resources>
