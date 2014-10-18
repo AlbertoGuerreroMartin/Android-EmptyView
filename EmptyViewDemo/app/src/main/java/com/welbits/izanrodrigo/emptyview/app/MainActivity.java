@@ -2,6 +2,8 @@ package com.welbits.izanrodrigo.emptyview.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class MainActivity extends Activity {
    protected @InjectView(android.R.id.empty) EmptyView emptyView;
    protected @InjectView(android.R.id.list) ListView listView;
    private ArrayAdapter<String> adapter;
+   private MenuItem reloadButton;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,20 @@ public class MainActivity extends Activity {
       loadData();
    }
 
+   @Override
+   public boolean onCreateOptionsMenu(Menu menu) {
+      super.onCreateOptionsMenu(menu);
+      reloadButton = menu.add("RELOAD").setOnMenuItemClickListener(item -> {
+         loadData();
+         return true;
+      }).setEnabled(false);
+      reloadButton.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+      return true;
+   }
+
    private void loadData() {
       // STATE 1: LOADING
+      toggleReloadButton();
       emptyView.startLoading();
       listView.postDelayed(() -> {
          if (RANDOM.nextBoolean()) {
@@ -63,6 +78,13 @@ public class MainActivity extends Activity {
             adapter.addAll($(0, 25).map(i -> "Item " + (i + 1)).toList());
             emptyView.successLoading();
          }
+         toggleReloadButton();
       }, 2000);
+   }
+
+   private void toggleReloadButton() {
+      if (reloadButton != null) {
+         reloadButton.setEnabled(!reloadButton.isEnabled());
+      }
    }
 }

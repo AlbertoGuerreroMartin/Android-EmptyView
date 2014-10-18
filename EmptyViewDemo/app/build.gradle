@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:+'
+        classpath 'me.tatarka:gradle-retrolambda:2.4.0'
     }
 }
 
@@ -11,12 +11,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'retrolambda'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 21
+    buildToolsVersion "21.0.0"
     defaultConfig {
         applicationId 'com.welbits.izanrodrigo.emptyview.app'
         minSdkVersion 15
-        targetSdkVersion 19
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -44,8 +44,8 @@ dependencies {
     compile project(':library')
 
     // Dollar library
-    compile 'org.bitbucket.dollar:dollar-lang:+'
+    compile 'org.bitbucket.dollar:dollar-lang:1.0-beta3'
 
     // Square libraries
-    compile 'com.jakewharton:butterknife:+'
+    compile 'com.jakewharton:butterknife:5.1.2'
 }

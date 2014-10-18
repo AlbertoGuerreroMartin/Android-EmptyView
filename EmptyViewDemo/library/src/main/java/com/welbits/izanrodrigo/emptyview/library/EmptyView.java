@@ -309,6 +309,29 @@ public class EmptyView extends RelativeLayout {
       return this;
    }
 
+   /////////////////////
+   // VIEWS ACCESSORS //
+   /////////////////////
+   public View getContent() {
+      return content;
+   }
+
+   public ProgressBar getProgressBar() {
+      return progressBar;
+   }
+
+   public Button getRetryButton() {
+      return retryButton;
+   }
+
+   public TextView getErrorTextView() {
+      return errorTextView;
+   }
+
+   public TextView getEmptyTextView() {
+      return emptyTextView;
+   }
+
    /////////////////////////////
    // VIEW VISIBILITY METHODS //
    /////////////////////////////
