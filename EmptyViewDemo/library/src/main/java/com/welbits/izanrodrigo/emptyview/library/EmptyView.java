@@ -1,11 +1,14 @@
 package com.welbits.izanrodrigo.emptyview.library;
 
 import android.animation.LayoutTransition;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -82,10 +85,16 @@ public class EmptyView extends RelativeLayout {
       }
    }
 
+   @SuppressLint("NewApi")
    private void init() {
       // Initial config
-      if (fadeAnimation) {
-         setLayoutTransition(new LayoutTransition());
+      if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+         if (fadeAnimation) {
+            setLayoutTransition(new LayoutTransition());
+         }
+      } else {
+         //TODO: Add animations for older sdk versions
+         Log.w(getClass().getSimpleName(), "Animations are not available due to device version (lower than API 11)");
       }
 
       // Progress bar
@@ -295,15 +304,21 @@ public class EmptyView extends RelativeLayout {
       return this;
    }
 
+   @SuppressLint("NewApi")
    public EmptyView fadeAnimation(boolean enabled) {
       fadeAnimation = enabled;
 
-      if (fadeAnimation) {
-         if (getLayoutTransition() == null) {
-            setLayoutTransition(new LayoutTransition());
+      if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+         if (fadeAnimation) {
+            if (getLayoutTransition() == null) {
+               setLayoutTransition(new LayoutTransition());
+            }
+         } else {
+            setLayoutTransition(null);
          }
       } else {
-         setLayoutTransition(null);
+         //TODO: Add animations for older sdk versions
+         Log.w(getClass().getSimpleName(), "Animations are not available due to device version (lower than API 11)");
       }
 
       return this;

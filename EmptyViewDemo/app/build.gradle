@@ -12,7 +12,7 @@ apply plugin: 'retrolambda'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.0"
+    buildToolsVersion "21.0.1"
     defaultConfig {
         applicationId 'com.welbits.izanrodrigo.emptyview.app'
         minSdkVersion 15
