@@ -111,9 +111,9 @@ public class EmptyView extends RelativeLayout {
       emptyTextView.setGravity(Gravity.CENTER);
       emptyTextView.setPadding(textPadding, 0, textPadding, 0);
       emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-      LayoutParams mPwPlP = new LayoutParams(LayoutParams.MATCH_PARENT, wC);
-      mPwPlP.addRule(CENTER_IN_PARENT, TRUE);
-      emptyTextView.setLayoutParams(mPwPlP);
+      LayoutParams lPwCwC = new LayoutParams(wC, wC);
+      lPwCwC.addRule(CENTER_IN_PARENT, TRUE);
+      emptyTextView.setLayoutParams(lPwCwC);
       if (!TextUtils.isEmpty(emptyText)) emptyTextView.setText(emptyText);
       addView(emptyTextView);
 
@@ -121,7 +121,7 @@ public class EmptyView extends RelativeLayout {
       // 0. Container
       errorLayout = new LinearLayout(getContext());
       errorLayout.setOrientation(LinearLayout.VERTICAL);
-      errorLayout.setLayoutParams(mPwPlP);
+      errorLayout.setLayoutParams(lPwCwC);
       addView(errorLayout);
 
       // 1. TextView
@@ -129,7 +129,7 @@ public class EmptyView extends RelativeLayout {
       errorTextView.setId(android.R.id.text2);
       errorTextView.setGravity(Gravity.CENTER);
       errorTextView.setPadding(textPadding, 0, textPadding, 0);
-      errorTextView.setLayoutParams(mPwPlP);
+      errorTextView.setLayoutParams(lPwCwC);
       errorTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
       if (!TextUtils.isEmpty(errorText)) errorTextView.setText(errorText);
       errorLayout.addView(errorTextView);

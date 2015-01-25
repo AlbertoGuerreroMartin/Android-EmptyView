@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:2.4.0'
+        classpath 'me.tatarka:gradle-retrolambda:2.5.0'
     }
 }
 
@@ -12,7 +12,7 @@ apply plugin: 'retrolambda'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.1"
+    buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId 'com.welbits.izanrodrigo.emptyview.app'
         minSdkVersion 15
@@ -22,7 +22,7 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
