@@ -4,19 +4,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 
 /**
  * Created by IzanRodrigo on 19/03/2015.
  */
 public class CustomEmptyView extends BaseEmptyView {
 
+   // Constants
    private static final int NO_VALUE = -1;
-
-   // Fields
-   private View emptyView;
-   private View loadingView;
-   private View errorView;
 
    // Constructors
    public CustomEmptyView(Context context) {
@@ -66,45 +61,5 @@ public class CustomEmptyView extends BaseEmptyView {
       } finally {
          typedArray.recycle();
       }
-   }
-
-   // Views for each state
-   @Override
-   public View getEmptyView() {
-      return emptyView;
-   }
-
-   public void setEmptyView(View emptyView) {
-      if (this.emptyView != null) {
-         removeView(this.emptyView);
-      }
-
-      this.emptyView = emptyView;
-   }
-
-   @Override
-   public View getErrorView() {
-      return errorView;
-   }
-
-   public void setErrorView(View errorView) {
-      if (this.emptyView != null) {
-         removeView(this.emptyView);
-      }
-
-      this.errorView = errorView;
-   }
-
-   @Override
-   public View getLoadingView() {
-      return loadingView;
-   }
-
-   public void setLoadingView(View loadingView) {
-      if (this.emptyView != null) {
-         removeView(this.emptyView);
-      }
-
-      this.loadingView = loadingView;
    }
 }

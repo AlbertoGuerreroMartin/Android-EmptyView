@@ -5,6 +5,8 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorButtonNormal">@color/primary</item>
+        <item name="android:colorButtonNormal">@color/primary</item>
+        <item name="android:buttonStyle">@style/Button</item>
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
@@ -20,7 +22,7 @@
     <style name="CustomEmptyView">
         <item name="emptyLayout">@layout/empty</item>
         <item name="errorLayout">@layout/error</item>
-        <item name="loadingLayout">@layout/loading</item>
+        <!--<item name="loadingLayout">@layout/loading</item>-->
     </style>
 
     <style name="TabStrip">
@@ -32,6 +34,10 @@
         <item name="pstsUnderlineColor">?colorAccent</item>
         <item name="pstsTextColorSelected">?colorAccent</item>
         <item name="pstsShouldExpand">true</item>
+    </style>
+
+    <style name="Button" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>

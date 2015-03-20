@@ -5,6 +5,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,11 @@ import android.widget.RelativeLayout;
  */
 public abstract class BaseEmptyView extends RelativeLayout implements EmptyView {
    // Fields
+   private View emptyView;
+   private View loadingView;
+   private View errorView;
    private View contentView;
+   private boolean initialized;
 
    // Constructors
    public BaseEmptyView(Context context) {
@@ -34,31 +40,33 @@ public abstract class BaseEmptyView extends RelativeLayout implements EmptyView 
 
    // Initialization methods
    @Override
-   public final void addView(View child) {
-      initializeWidget(child);
+   public final void addView(@NonNull View child) {
+      if (!initialized) {
+         initWidget(child);
+      } else {
+         throw new IllegalStateException("EmptyView can host only one direct child");
+      }
 
       // Add child
       super.addView(child);
    }
 
    @Override
-   public final void addView(View child, ViewGroup.LayoutParams params) {
-      initializeWidget(child);
+   public final void addView(@NonNull View child, ViewGroup.LayoutParams params) {
+      if (!initialized) {
+         initWidget(child);
+      } else {
+         throw new IllegalStateException("EmptyView can host only one direct child");
+      }
 
       // Add child
       super.addView(child, -1, params);
    }
 
-   private void initializeWidget(View contentView) {
-      if (getChildCount() > 0) {
-         throw new IllegalStateException("EmptyView can host only one direct child");
-      }
-
+   private void initWidget(View contentView) {
       // Initialize widget
       this.contentView = contentView;
-      if (getEmptyView() != null) super.addView(getEmptyView());
-      if (getErrorView() != null) super.addView(getErrorView());
-      if (getLoadingView() != null) super.addView(getLoadingView());
+      initialized = true;
 
       // Show content by default
       showContent();
@@ -96,8 +104,51 @@ public abstract class BaseEmptyView extends RelativeLayout implements EmptyView 
       }
    }
 
+   // Views for each state
+   @Nullable
    @Override
-   public View getContentView() {
+   public View getEmptyView() {
+      return emptyView;
+   }
+
+   public void setEmptyView(@NonNull View emptyView) {
+      if (this.emptyView != null) {
+         removeView(this.emptyView);
+      }
+
+      super.addView(this.emptyView = emptyView);
+   }
+
+   @Nullable
+   @Override
+   public View getErrorView() {
+      return errorView;
+   }
+
+   public void setErrorView(@NonNull View errorView) {
+      if (this.errorView != null) {
+         removeView(this.errorView);
+      }
+
+      super.addView(this.errorView = errorView);
+   }
+
+   @Nullable
+   @Override
+   public View getLoadingView() {
+      return loadingView;
+   }
+
+   public void setLoadingView(@NonNull View loadingView) {
+      if (this.loadingView != null) {
+         removeView(this.loadingView);
+      }
+
+      super.addView(this.loadingView = loadingView);
+   }
+
+   @Override
+   public final View getContentView() {
       return contentView;
    }
 

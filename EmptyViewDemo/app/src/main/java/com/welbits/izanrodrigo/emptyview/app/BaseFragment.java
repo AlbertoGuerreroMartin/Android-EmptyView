@@ -3,9 +3,6 @@ package com.welbits.izanrodrigo.emptyview.app;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -13,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.welbits.izanrodrigo.emptyview.library.CustomEmptyView;
 import com.welbits.izanrodrigo.emptyview.library.EmptyView;
 
 import java.util.Random;
@@ -27,9 +25,9 @@ public abstract class BaseFragment extends Fragment {
    private static final Random RANDOM = new Random();
 
    // Fields
-   protected @InjectView(android.R.id.empty) EmptyView emptyView;
-   protected @InjectView(android.R.id.list) ListView listView;
-   protected @InjectView(R.id.fab) FloatingActionButton fab;
+   @InjectView(android.R.id.empty) EmptyView emptyView;
+   @InjectView(android.R.id.list) ListView listView;
+   @InjectView(R.id.fab) FloatingActionButton fab;
    private ArrayAdapter<String> adapter;
    private boolean loading;
 
@@ -109,6 +107,14 @@ public abstract class BaseFragment extends Fragment {
    }
 
    public static final class CustomEmptyViewFragment extends BaseFragment {
+      @Override
+      public void onViewCreated(View view, Bundle savedInstanceState) {
+         super.onViewCreated(view, savedInstanceState);
+         CustomEmptyView emptyView = (CustomEmptyView) view.findViewById(android.R.id.empty);
+         emptyView.setLoadingView(LayoutInflater.from(view.getContext())
+               .inflate(R.layout.loading, emptyView, false));
+      }
+
       @Override
       protected int getLayout() {
          return R.layout.fragment_custom_empty_view;

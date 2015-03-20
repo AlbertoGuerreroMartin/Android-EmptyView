@@ -14,26 +14,31 @@ import android.widget.TextView;
  */
 public class BasicEmptyView extends BaseEmptyView {
 
+   // Constants
    private static final int NO_VALUE = -1;
-
-   // Fields
-   private TextView emptyView;
-   private ProgressBar loadingView;
-   private LinearLayout errorView;
 
    // Constructors
    public BasicEmptyView(Context context) {
       super(context);
+      initWidget();
    }
 
    public BasicEmptyView(Context context, AttributeSet attrs) {
       super(context, attrs);
+      initWidget();
       readAttrs(attrs);
    }
 
    public BasicEmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
       super(context, attrs, defStyleAttr);
+      initWidget();
       readAttrs(attrs);
+   }
+
+   private void initWidget() {
+      setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.default_text, this, false));
+      setErrorView(LayoutInflater.from(getContext()).inflate(R.layout.default_error, this, false));
+      setLoadingView(LayoutInflater.from(getContext()).inflate(R.layout.default_loading, this, false));
    }
 
    private void readAttrs(AttributeSet attrs) {
@@ -77,31 +82,18 @@ public class BasicEmptyView extends BaseEmptyView {
       }
    }
 
-   // Views for each state
    @Override
    public TextView getEmptyView() {
-      if (emptyView == null) {
-         emptyView = (TextView) LayoutInflater.from(getContext())
-               .inflate(R.layout.default_text, this, false);
-      }
-      return emptyView;
+      return (TextView) super.getEmptyView();
    }
 
    @Override
    public LinearLayout getErrorView() {
-      if (errorView == null) {
-         errorView = (LinearLayout) LayoutInflater.from(getContext())
-               .inflate(R.layout.default_error, this, false);
-      }
-      return errorView;
+      return (LinearLayout) super.getErrorView();
    }
 
    @Override
    public ProgressBar getLoadingView() {
-      if (loadingView == null) {
-         loadingView = (ProgressBar) LayoutInflater.from(getContext())
-               .inflate(R.layout.default_loading, this, false);
-      }
-      return loadingView;
+      return (ProgressBar) super.getLoadingView();
    }
 }
