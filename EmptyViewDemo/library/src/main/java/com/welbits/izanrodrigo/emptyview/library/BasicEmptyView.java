@@ -6,8 +6,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -55,7 +54,7 @@ public class BasicEmptyView extends BaseEmptyView {
          // Empty text
          String emptyText = typedArray.getString(R.styleable.BasicEmptyView_emptyText);
          if (!TextUtils.isEmpty(emptyText)) {
-            getEmptyView().setText(emptyText);
+            ((TextView) getEmptyView()).setText(emptyText);
          }
 
          // Error text
@@ -75,7 +74,7 @@ public class BasicEmptyView extends BaseEmptyView {
          // Text size
          int textSize = typedArray.getInteger(R.styleable.BasicEmptyView_textSizeSP, NO_VALUE);
          if (textSize != NO_VALUE) {
-            getEmptyView().setTextSize(textSize);
+            ((TextView) getEmptyView()).setTextSize(textSize);
             errorTextView.setTextSize(textSize);
          }
       } finally {
@@ -85,19 +84,19 @@ public class BasicEmptyView extends BaseEmptyView {
 
    @NonNull
    @Override
-   public TextView getEmptyView() {
-      return (TextView) super.getEmptyView();
+   public View getEmptyView() {
+      return super.getEmptyView();
    }
 
    @NonNull
    @Override
-   public LinearLayout getErrorView() {
-      return (LinearLayout) super.getErrorView();
+   public View getErrorView() {
+      return super.getErrorView();
    }
 
    @NonNull
    @Override
-   public ProgressBar getLoadingView() {
-      return (ProgressBar) super.getLoadingView();
+   public View getLoadingView() {
+      return super.getLoadingView();
    }
 }

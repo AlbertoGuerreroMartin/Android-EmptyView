@@ -111,6 +111,7 @@ public abstract class BaseEmptyView extends RelativeLayout implements EmptyView 
       return emptyView;
    }
 
+   @Override
    public void setEmptyView(@NonNull View emptyView) {
       if (this.emptyView != null) {
          removeView(this.emptyView);
@@ -125,6 +126,7 @@ public abstract class BaseEmptyView extends RelativeLayout implements EmptyView 
       return errorView;
    }
 
+   @Override
    public void setErrorView(@NonNull View errorView) {
       if (this.errorView != null) {
          removeView(this.errorView);
@@ -139,6 +141,7 @@ public abstract class BaseEmptyView extends RelativeLayout implements EmptyView 
       return loadingView;
    }
 
+   @Override
    public void setLoadingView(@NonNull View loadingView) {
       if (this.loadingView != null) {
          removeView(this.loadingView);
