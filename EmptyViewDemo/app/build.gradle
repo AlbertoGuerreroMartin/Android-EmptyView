@@ -43,9 +43,16 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
 
+    // Google libraries
+    compile 'com.android.support:appcompat-v7:22.0.0'
+
     // Dollar library
     compile 'org.bitbucket.dollar:dollar-lang:1.0-beta3'
 
     // Square libraries
     compile 'com.jakewharton:butterknife:6.1.0'
+
+    // Material
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
+    compile 'com.melnykov:floatingactionbutton:1.2.0'
 }

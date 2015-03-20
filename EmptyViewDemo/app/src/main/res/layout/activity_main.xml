@@ -1,13 +1,19 @@
-<com.welbits.izanrodrigo.emptyview.library.EmptyView
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/EmptyView"
-    android:id="@android:id/empty"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ListView
-        android:id="@android:id/list"
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabStrip"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/TabStrip"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</com.welbits.izanrodrigo.emptyview.library.EmptyView>
+</LinearLayout>

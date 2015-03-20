@@ -1,90 +1,79 @@
 package com.welbits.izanrodrigo.emptyview.app;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 
-import com.welbits.izanrodrigo.emptyview.library.EmptyView;
+import com.astuetz.PagerSlidingTabStrip;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import static org.bitbucket.dollar.Dollar.$;
+/**
+ * Created by IzanRodrigo on 20/03/2015.
+ */
+public class MainActivity extends ActionBarActivity {
 
-public class MainActivity extends Activity {
-   // Constants
-   private static final Random RANDOM = new Random();
-
-   // Fields
-   protected @InjectView(android.R.id.empty) EmptyView emptyView;
-   protected @InjectView(android.R.id.list) ListView listView;
-   private ArrayAdapter<String> adapter;
-   private MenuItem reloadButton;
+   @InjectView(R.id.tabStrip) PagerSlidingTabStrip tabStrip;
+   @InjectView(R.id.viewPager) ViewPager viewPager;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
+      getSupportActionBar().setElevation(0.0f);
       ButterKnife.inject(this);
 
-      // Configure list view
-      emptyView.retry(R.string.retry, this::loadData);
-      adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-      listView.setAdapter(adapter);
-      listView.setOnItemClickListener((p, v, position, id) -> {
-         Toast.makeText(this, adapter.getItem(position), Toast.LENGTH_SHORT).show();
-      });
-
-      // Load data
-      loadData();
+      // Configure view pager
+      PagerAdapter pagerAdapter = new PagerAdapter();
+      viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
+      viewPager.setAdapter(pagerAdapter);
+      tabStrip.setViewPager(viewPager);
    }
 
-   @Override
-   public boolean onCreateOptionsMenu(Menu menu) {
-      super.onCreateOptionsMenu(menu);
-      reloadButton = menu.add("RELOAD").setOnMenuItemClickListener(item -> {
-         loadData();
-         return true;
-      }).setEnabled(false);
-      reloadButton.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-      return true;
-   }
+   // Internal classes
+   private class PagerAdapter extends FragmentPagerAdapter {
 
-   private void loadData() {
-      // STATE 1: LOADING
-      toggleReloadButton();
-      emptyView.startLoading();
-      listView.postDelayed(() -> {
-         if (RANDOM.nextBoolean()) {
-            // STATE 3: ERROR LOADING
-            if (RANDOM.nextBoolean()) {
-               emptyView.errorLoading();
+      private final List<TabInfo> tabs;
+
+      public PagerAdapter() {
+         super(getSupportFragmentManager());
+         tabs = new ArrayList<TabInfo>() {
+            {
+               add(new TabInfo(new BaseFragment.BasicEmptyViewFragment(), "Basic"));
+               add(new TabInfo(new BaseFragment.CustomEmptyViewFragment(), "Custom"));
             }
+         };
+      }
 
-            // STATE 4: EMPTY
-            else {
-               emptyView.displayEmpty();
-            }
+      @Override
+      public Fragment getItem(int position) {
+         return tabs.get(position).fragment;
+      }
+
+      @Override
+      public CharSequence getPageTitle(int position) {
+         return tabs.get(position).title;
+      }
+
+      @Override
+      public int getCount() {
+         return tabs.size();
+      }
+
+      private final class TabInfo {
+         public final Fragment fragment;
+         public final String title;
+
+         private TabInfo(Fragment fragment, String title) {
+            this.fragment = fragment;
+            this.title = title;
          }
-
-         // STATE 2: SUCCESS LOADING
-         else {
-            adapter.addAll($(0, 25).map(i -> "Item " + (i + 1)).toList());
-            emptyView.successLoading();
-         }
-         toggleReloadButton();
-      }, 2000);
-   }
-
-   private void toggleReloadButton() {
-      if (reloadButton != null) {
-         reloadButton.setEnabled(!reloadButton.isEnabled());
       }
    }
 }

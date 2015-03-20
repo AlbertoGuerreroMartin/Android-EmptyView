@@ -1,16 +1,36 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorButtonNormal">@color/primary</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
-    <style name="EmptyView">
+    <style name="BasicEmptyView">
         <item name="emptyText">@string/empty</item>
         <item name="errorText">@string/error</item>
         <item name="textSizeSP">@integer/textSize</item>
         <item name="textPadding">@dimen/textPadding</item>
-        <item name="fadeAnimation">true</item>
+        <item name="fadeAnimation">false</item>
+    </style>
+
+    <style name="CustomEmptyView">
+        <item name="emptyLayout">@layout/empty</item>
+        <item name="errorLayout">@layout/error</item>
+        <item name="loadingLayout">@layout/loading</item>
+    </style>
+
+    <style name="TabStrip">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="pstsIndicatorColor">?colorAccent</item>
+        <item name="pstsDividerColor">?colorAccent</item>
+        <item name="pstsUnderlineColor">?colorAccent</item>
+        <item name="pstsTextColorSelected">?colorAccent</item>
+        <item name="pstsShouldExpand">true</item>
     </style>
 
 </resources>
