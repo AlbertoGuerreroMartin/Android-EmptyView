@@ -2,6 +2,7 @@ package com.welbits.izanrodrigo.emptyview.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -82,16 +83,19 @@ public class BasicEmptyView extends BaseEmptyView {
       }
    }
 
+   @NonNull
    @Override
    public TextView getEmptyView() {
       return (TextView) super.getEmptyView();
    }
 
+   @NonNull
    @Override
    public LinearLayout getErrorView() {
       return (LinearLayout) super.getErrorView();
    }
 
+   @NonNull
    @Override
    public ProgressBar getLoadingView() {
       return (ProgressBar) super.getLoadingView();
